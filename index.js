@@ -1,7 +1,9 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const api = require('./api');
-
+const generateProfile = require('./generateProfile');
+const open = require("open");
+const convertFactory = require("electron-html-to");
 //list of questions // array of JSON object
 const questions = [
     { 
@@ -27,6 +29,37 @@ inquirer.prompt(questions)
         console.log('public_repos', reply.data.public_repos);
         console.log('followers', reply.data.followers);
         console.log('following', reply.data.following);
+        console.log('img', reply.data.avatar_url);
+        var data = {
+            name: reply.data.name,
+            avatar: reply.data.avatar_url,
+            email: reply.data.email,
+            followers: reply.data.followers,
+            following: reply.data.following,
+            publicRepo: reply.data.publicRepo
+        }
+        return generateProfile(data)
     })
-})
+
+    .then(html => {
+        //console.log(html);
+       // const conversion = convertFactory({
+        //    converterPath: convertFactory.converters.PDF
+        //  });
+  
+         // conversion({ html }, function(err, result) {
+         //   if (err) {
+          //    return console.error(err);
+          //  }
+  
+         //   result.stream.pipe(
+              fs.createWriteStream(path.join(__dirname, "resume.pdf"))
+          //  );
+         //   conversion.kill();
+          });
+  
+        //  open(path.join(process.cwd(), "resume.pdf"));
+       
+    });
+//})
 
