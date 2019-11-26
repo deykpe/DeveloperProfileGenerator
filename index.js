@@ -32,9 +32,12 @@ inquirer.prompt(questions)
         console.log('following', reply.data.following);
         console.log('img', reply.data.avatar_url);
         var data = {
+            login: reply.data.login,
             name: reply.data.name,
+            id: reply.data.id,
             avatar: reply.data.avatar_url,
             email: reply.data.email,
+            bio: reply.data.bio,
             followers: reply.data.followers,
             following: reply.data.following,
             location: reply.data.location,
