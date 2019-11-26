@@ -24,7 +24,7 @@ const questions = [
 inquirer.prompt(questions)
 .then(response => {
     api.getUserData(response.github).then(reply => {
-        console.log(reply);
+        // console.log(reply);
         console.log('login', reply.data.login);
         console.log('id', reply.data.id);
         console.log('public_repos', reply.data.public_repos);
